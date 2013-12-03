@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="305de472-c953-4869-a64b-bc99c2b994c6" solutionId="305de472-c953-4869-a64b-bc99c2b994c6" resetWebServer="false" sharePointProductVersion="15.0" name="Nauplius.SharePoint.CrawlTarget" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="a21131af-c6d9-4a05-bf78-2209d344b9a2" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="1524593a-2575-44ad-b99f-cb24142630a6" />
+  </projectItems>
+</package>
