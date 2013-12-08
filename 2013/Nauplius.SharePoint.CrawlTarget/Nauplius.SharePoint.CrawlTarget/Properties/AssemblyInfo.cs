@@ -9,7 +9,7 @@ using System.Security;
 [assembly: AssemblyTitle("Nauplius.SharePoint.CrawlTarget")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Nauplius")]
 [assembly: AssemblyProduct("Nauplius.SharePoint.CrawlTarget")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

@@ -50,6 +50,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
@@ -63,6 +64,15 @@
     <Compile Include="ADMIN\Nauplius.SharePoint.CrawlTarget\Target.aspx.designer.cs">
       <DependentUpon>Target.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ADMIN\Nauplius.SharePoint.CrawlTarget\AddTarget.aspx.cs">
+      <DependentUpon>AddTarget.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ADMIN\Nauplius.SharePoint.CrawlTarget\AddTarget.aspx.designer.cs">
+      <DependentUpon>AddTarget.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mapping.cs" />
+    <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,13 +93,13 @@
       <SharePointProjectItemId>{df02adc5-7670-48e3-8cd8-1f4775883da9}</SharePointProjectItemId>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="ADMIN\Nauplius.SharePoint.CrawlTarget\icon32x32.png" />
+    <Content Include="ADMIN\Nauplius.SharePoint.CrawlTarget\icon_32x32.png" />
     <Content Include="Features\Nauplius CrawlTarget Settings\Nauplius CrawlTarget Settings.Template.xml">
       <DependentUpon>Nauplius CrawlTarget Settings.feature</DependentUpon>
     </Content>
     <Content Include="ADMIN\Nauplius.SharePoint.CrawlTarget\Target.aspx" />
+    <Content Include="ADMIN\Nauplius.SharePoint.CrawlTarget\AddTarget.aspx" />
     <Content Include="WebAppRibbon\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

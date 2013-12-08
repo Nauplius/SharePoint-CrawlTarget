@@ -10,51 +10,78 @@
 namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarget {
     
     
-    public partial class Target {
+    public partial class AddTarget {
         
         /// <summary>
-        /// onetidPolicyTB control.
+        /// InputFormSection1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl onetidPolicyTB;
+        protected global::System.Web.UI.UserControl InputFormSection1;
         
         /// <summary>
-        /// btnAdd control.
+        /// ddlZones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.DropDownList ddlZones;
         
         /// <summary>
-        /// btnDelete control.
+        /// InputFormSection2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDelete;
+        protected global::System.Web.UI.UserControl InputFormSection2;
         
         /// <summary>
-        /// GvItems control.
+        /// ddlHosts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.SPGridView GvItems;
+        protected global::System.Web.UI.WebControls.DropDownList ddlHosts;
         
         /// <summary>
-        /// lblNoTargets control.
+        /// InputFormSection3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNoTargets;
+        protected global::System.Web.UI.UserControl InputFormSection3;
+        
+        /// <summary>
+        /// chkThrottle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkThrottle;
+        
+        /// <summary>
+        /// btnSaveTop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveTop;
+        
+        /// <summary>
+        /// btnCancelTop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelTop;
     }
 }

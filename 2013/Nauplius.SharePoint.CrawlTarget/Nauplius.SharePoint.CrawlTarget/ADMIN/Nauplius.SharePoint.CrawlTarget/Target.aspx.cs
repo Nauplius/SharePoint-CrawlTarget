@@ -1,72 +1,89 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using Microsoft.SharePoint;
+﻿using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
+using Microsoft.SharePoint.Utilities;
 using Microsoft.SharePoint.WebControls;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarget
 {
     public partial class Target : LayoutsPageBase
     {
-        private SPWebApplication webApplication;
-        private readonly string _webFoundation = @"Microsoft SharePoint Foundation Web Application";
+        private SPWebApplication _webApplication;
+
         protected void Page_Init(object sender, EventArgs e)
         {
             var farm = SPFarm.Local;
             var webAppId = new Guid(Request["Id"]);
-            webApplication = (SPWebApplication)farm.GetObject(webAppId);
-
+            try
+            {
+                _webApplication = (SPWebApplication)farm.GetObject(webAppId);
+            }
+            catch (SPException)
+            {
+                SPUtility.TransferToErrorPage("An error occurred attempting to resolve the Web Application ID, please contact your Administrator.");
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack) return;
+            if (_webApplication == null) return;
+            btnAdd.Attributes.Add("onclick", "AddTarget('" + _webApplication.GetResponseUri(SPUrlZone.Default).AbsoluteUri + "'); return false;");
 
-            CreateDataTable();
+            var servers = SPFarm.Local.Servers;
+
+            if (servers.Count == 1 && Debugger.IsAttached != true)
+            {
+                SPUtility.TransferToErrorPage("There is only one server in the farm. Please add additional servers to use this feature.");
+            }
+
+            PopulateGridView();
         }
 
-        private void CreateDataTable()
+        protected void PopulateGridView()
         {
-            var dt = new DataTable();
-            dt.Columns.Add("Web Application", typeof (SPWebApplication));
-            dt.Columns.Add("Zone", typeof (SPUrlZone));
-            dt.Columns.Add("Crawl Target", typeof (SPServer));
+            var sds = Mapping.GetMapping(_webApplication);
 
+            if (sds == null)
+            {
+                GvItems.Visible = false;
+                lblNoTargets.Visible = true;
+                return;
+            }
+
+            GvItems.DataSource = sds;// data;
+            GvItems.DataBind();
         }
 
-        private void AddMapping(SPWebApplication webApp, SPUrlZone zone, SPServer server)
+        protected void chkBoxSL_CheckedChanged(object sender, EventArgs e)
         {
-            if (webApp == null || server == null) return;
-            var uri = new Uri("http://" + server.Name);
-            var list = new List<System.Uri>(1) {uri};
-            webApp.SiteDataServers.Add(zone, list);
-            webApp.Update();
+            foreach (CheckBox chk in from GridViewRow rowItem in GvItems.Rows select (CheckBox)(rowItem.Cells[0].FindControl("chkId")))
+            {
+                chk.Checked = ((CheckBox)sender).Checked;
+            }
         }
 
-        private void RemoveMapping(SPWebApplication webApp, SPUrlZone zone, SPServer server)
+        protected void btnDelete_OnDelete(object sender, EventArgs e)
         {
-            if (webApp == null || server == null) return;
-            webApp.SiteDataServers.Remove(zone);
-            webApp.Update();
-        }
+            for (int i = 0; i < GvItems.Rows.Count; i++)
+            {
+                var chkDelete = (CheckBox) GvItems.Rows[i].Cells[0].FindControl("chkId");
 
-        private void HttpThrottle(SPServer server, bool remove)
-        {
-            var webService = SPFarm.Local.Services.OfType<SPWebService>().First();
-            var instance = new SPWebServiceInstance(_webFoundation, server, webService) { DisableLocalHttpThrottling = remove };
-            instance.Update();
-        }
+                if (chkDelete.Checked)
+                {
+                    var lblZone = (Label)GvItems.Rows[i].Cells[1].FindControl("lblZone");
 
-        protected void btnCancel_OnCancel(object sender, EventArgs e)
-        {
+                    SPUrlZone zone;
+                    SPUrlZone.TryParse(lblZone.Text, out zone);
+                    Mapping.RemoveMapping(_webApplication, zone);
+                }
+            }
 
-        }
-
-        protected void btnSave_OnSave(object sender, EventArgs e)
-        {
-            
+            PopulateGridView();
         }
     }
 }
