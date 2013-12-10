@@ -30,9 +30,10 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnAdd.Attributes.Add("onclick", "NewCrawlTarget('" + _webApplication.GetResponseUri(SPUrlZone.Default).AbsoluteUri + "'); return false;");
+            
             if (IsPostBack) return;
             if (_webApplication == null) return;
-            btnAdd.Attributes.Add("onclick", "AddTarget('" + _webApplication.GetResponseUri(SPUrlZone.Default).AbsoluteUri + "'); return false;");
 
             var servers = SPFarm.Local.Servers;
 
@@ -55,7 +56,7 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
                 return;
             }
 
-            GvItems.DataSource = sds;// data;
+            GvItems.DataSource = sds;
             GvItems.DataBind();
         }
 
@@ -84,6 +85,17 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
             }
 
             PopulateGridView();
+        }
+
+        protected void GvItems_OnRowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.DataItem != null)
+            {
+                var label = (Label)e.Row.FindControl("lblServer");
+                
+                string[] uris = ((KeyValuePair<SPUrlZone, List<Uri>>)e.Row.DataItem).Value.Select(x => x.ToString()).ToArray();
+                label.Text = string.Join(", ", uris);
+            }
         }
     }
 }

@@ -25,11 +25,12 @@ namespace Nauplius.SharePoint.CrawlTarget
         public static SDS GetMapping(SPWebApplication webApp)
         {
             var sds = new SDS();
-            if (webApp.SiteDataServers.Count < 1) return null;
 
+            if (webApp.SiteDataServers.Count < 1) return null;
             foreach (var t in webApp.SiteDataServers)
             {
-                sds.Add(t.Key, new Uri(t.Value[0].ToString()));
+                var uriList = t.Value.ToList();
+                sds.Add(t.Key, uriList);
             }
             return sds;
         }

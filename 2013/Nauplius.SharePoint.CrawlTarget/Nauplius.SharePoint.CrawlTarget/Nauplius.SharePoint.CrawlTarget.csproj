@@ -64,12 +64,12 @@
     <Compile Include="ADMIN\Nauplius.SharePoint.CrawlTarget\Target.aspx.designer.cs">
       <DependentUpon>Target.aspx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ADMIN\Nauplius.SharePoint.CrawlTarget\AddTarget.aspx.cs">
-      <DependentUpon>AddTarget.aspx</DependentUpon>
+    <Compile Include="ADMIN\Nauplius.SharePoint.CrawlTarget\NewCrawlTarget.aspx.cs">
+      <DependentUpon>NewCrawlTarget.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ADMIN\Nauplius.SharePoint.CrawlTarget\AddTarget.aspx.designer.cs">
-      <DependentUpon>AddTarget.aspx.cs</DependentUpon>
+    <Compile Include="ADMIN\Nauplius.SharePoint.CrawlTarget\NewCrawlTarget.aspx.designer.cs">
+      <DependentUpon>NewCrawlTarget.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Mapping.cs" />
     <Compile Include="Properties.cs" />
@@ -99,7 +99,7 @@
       <DependentUpon>Nauplius CrawlTarget Settings.feature</DependentUpon>
     </Content>
     <Content Include="ADMIN\Nauplius.SharePoint.CrawlTarget\Target.aspx" />
-    <Content Include="ADMIN\Nauplius.SharePoint.CrawlTarget\AddTarget.aspx" />
+    <Content Include="ADMIN\Nauplius.SharePoint.CrawlTarget\NewCrawlTarget.aspx" />
     <Content Include="WebAppRibbon\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

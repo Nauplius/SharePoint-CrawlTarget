@@ -1,4 +1,6 @@
-﻿using Microsoft.SharePoint;
+﻿using System.Globalization;
+using System.Web;
+using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
 using Microsoft.SharePoint.Utilities;
 using Microsoft.SharePoint.WebControls;
@@ -9,7 +11,7 @@ using System.Linq;
 
 namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarget
 {
-    public partial class AddTarget : LayoutsPageBase
+    public partial class NewCrawlTarget : LayoutsPageBase
     {
         private SPWebApplication _webApplication;
         protected void Page_Load(object sender, EventArgs e)
@@ -36,6 +38,11 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
             ddlZones.DataTextField = "value";
             ddlZones.DataBind();
 
+            foreach (var server in SPFarm.Local.Servers.Where(server => server.DisplayName == ddlHosts.SelectedValue))
+            {
+                chkThrottle.Checked = Mapping.EnumHttpThrottle(server);
+            }
+
             Web.AllowUnsafeUpdates = false;
         }
 
@@ -46,12 +53,12 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
             var ht = new Hashtable();
             for (var i = 0; i < names.Length; i++)
             {
-                ht.Add(Convert.ToInt32(values.GetValue(i)).ToString(), names[i]);
+                ht.Add(Convert.ToInt32(values.GetValue(i)).ToString(CultureInfo.InvariantCulture), names[i]);
             }
             return ht;
         }
 
-        protected void btnOk_OnClick(object sender, EventArgs e)
+        protected void btnSave_OnClick(object sender, EventArgs e)
         {
             try
             {
@@ -73,23 +80,27 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
                 {
                     Mapping.HttpThrottle(server, true);
                 }
+                else if (!chkThrottle.Checked)
+                {
+                    Mapping.HttpThrottle(server, false);
+                }
                 break;
             }
 
-            var response =
-                string.Format(
-                    "<script type='text/javascript'>var retArray = new Array; retArray.push(0);" +
-                    "window.frameElement.commitPopup(retArray);</script>");
-            Context.Response.Write(response);
-            Context.Response.Flush();
-            Context.Response.End();
+            var context = HttpContext.Current;
+            if (HttpContext.Current.Request.QueryString["IsDlg"] == null) return;
+            context.Response.Write("<script type='text/javascript'>window.frameElement.commitPopup();</script>");
+            context.Response.Flush();
+            context.Response.End();
         }
 
         protected void btnCancel_OnClick(object sender, EventArgs e)
         {
-            Page.Response.Clear();
-            Page.Response.Write("<script type=\"text/javascript\">window.frameElement.commonModalDialogClose(0);</script>");
-            Page.Response.End();
+            var context = HttpContext.Current;
+            if (HttpContext.Current.Request.QueryString["IsDlg"] == null) return;
+            context.Response.Write("<script type='text/javascript'>window.frameElement.commitPopup();</script>");
+            context.Response.Flush();
+            context.Response.End();
         }
 
         protected void ddlHosts_OnSelectedIndexChange(object sender, EventArgs e)

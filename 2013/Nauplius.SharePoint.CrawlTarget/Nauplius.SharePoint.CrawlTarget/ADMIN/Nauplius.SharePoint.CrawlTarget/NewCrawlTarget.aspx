@@ -5,7 +5,7 @@
 <%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddTarget.aspx.cs" Inherits="Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarget.AddTarget" DynamicMasterPageFile="~masterurl/default.master" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NewCrawlTarget.aspx.cs" Inherits="Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarget.NewCrawlTarget" DynamicMasterPageFile="~masterurl/default.master" %>
 
 <%@ Register TagPrefix="wssuc" TagName="InputFormSection" src="~/_controltemplates/InputFormSection.ascx" %>
 <%@ Register TagPrefix="wssuc" TagName="InputFormControl" src="~/_controltemplates/InputFormControl.ascx" %>
@@ -70,10 +70,10 @@
         </tr>
         <wssuc:ButtonSection runat="server" TopButtons="true" BottomSpacing="5" ShowSectionLine="false" ShowStandardCancelButton="false">
 		    <Template_Buttons>
-			    <asp:Button UseSubmitBehavior="false" runat="server" class="ms-ButtonHeightWidth" OnClick="btnOk_OnClick" 
-                    Text="Save" id="btnSaveTop"/>
+			    <asp:Button UseSubmitBehavior="false" runat="server" class="ms-ButtonHeightWidth" OnClick="btnSave_OnClick" 
+                    Text="Save" id="btnSave" CausesValidation="False"/>
 			    <asp:Button UseSubmitBehavior="false" runat="server" class="ms-ButtonHeightWidth" OnClick="btnCancel_OnClick" 
-                    Text="<%$Resources:wss,multipages_cancelbutton_text%>" id="btnCancelTop" accesskey="<%$Resources:wss,cancelbutton_accesskey%>" CausesValidation="false"/>
+                    Text="Cancel" id="btnCancel" CausesValidation="false"/>
 		    </Template_Buttons>
 	    </wssuc:ButtonSection>  
     </table>

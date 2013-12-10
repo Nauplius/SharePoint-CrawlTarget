@@ -10,7 +10,7 @@
 namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarget {
     
     
-    public partial class AddTarget {
+    public partial class NewCrawlTarget {
         
         /// <summary>
         /// InputFormSection1 control.
@@ -67,21 +67,21 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
         protected global::System.Web.UI.WebControls.CheckBox chkThrottle;
         
         /// <summary>
-        /// btnSaveTop control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveTop;
+        protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// btnCancelTop control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelTop;
+        protected global::System.Web.UI.WebControls.Button btnCancel;
     }
 }
