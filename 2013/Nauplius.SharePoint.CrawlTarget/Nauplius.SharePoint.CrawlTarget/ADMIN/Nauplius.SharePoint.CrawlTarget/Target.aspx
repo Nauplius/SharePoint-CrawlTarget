@@ -17,18 +17,17 @@
     </style>
     <script type="text/javascript">
         function NewCrawlTarget(webAppUri) {
+            LoadSodByKey("sp.ui.dialog.js", null);
             var targetUrl = "/_admin/Nauplius.SharePoint.CrawlTarget/NewCrawlTarget.aspx?WA=" + webAppUri + "&IsDlg=1";
 
-            var options = {
-                url: targetUrl,
-                args: null,
-                title: 'Add Crawl Target for ' + webAppUri,
-                dialogReturnCallback: childCallback,
-            };
-            SP.SOD.execute('sp.ui.dialog.js', 'SP.UI.ModalDialog.showModalDialog', options);
-
-            function childCallback(dialogResult, returnValue) {
-                SP.UI.ModalDialog.RefreshPage(0);
+            var options = SP.UI.$create_DialogOptions();
+            options.url = targetUrl;
+            options.showClose = true;
+            options.dialogReturnValueCallback = dlgShowClose;
+            SP.UI.ModalDialog.showModalDialog(options);
+            
+            function dlgShowClose() {
+                location.reload(true);
             }
         }
     </script>

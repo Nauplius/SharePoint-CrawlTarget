@@ -30,8 +30,6 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            btnAdd.Attributes.Add("onclick", "NewCrawlTarget('" + _webApplication.GetResponseUri(SPUrlZone.Default).AbsoluteUri + "'); return false;");
-            
             if (IsPostBack) return;
             if (_webApplication == null) return;
 
@@ -43,6 +41,9 @@ namespace Nauplius.SharePoint.CrawlTarget.Layouts.Nauplius.SharePoint.CrawlTarge
             }
 
             PopulateGridView();
+
+            btnAdd.Attributes.Add("onClick", "SP.SOD.execute( 'sp.ui.dialog.js', 'NewCrawlTarget', '" + _webApplication.GetResponseUri(SPUrlZone.Default).AbsoluteUri + "' ); return false;");
+            
         }
 
         protected void PopulateGridView()
