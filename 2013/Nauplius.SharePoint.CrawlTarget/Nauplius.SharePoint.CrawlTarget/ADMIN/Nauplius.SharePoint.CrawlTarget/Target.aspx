@@ -23,11 +23,12 @@
             var options = SP.UI.$create_DialogOptions();
             options.url = targetUrl;
             options.showClose = true;
+            options.title = "Add Crawl Target to " + webAppUri;
             options.dialogReturnValueCallback = dlgShowClose;
             SP.UI.ModalDialog.showModalDialog(options);
             
             function dlgShowClose() {
-                location.reload(true);
+                window.location = window.location.href;
             }
         }
     </script>
